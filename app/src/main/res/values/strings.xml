@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Cermati Test App</string>
+    <string name="hint_search_github_user">Search Github users</string>
+    <string name="no_user_found">no user found</string>
+    <string name="loading_data">Loading data..</string>
+    <string name="loading_more_data">Loading more data..</string>
+    <string name="failed_to_load_data">Failed to load data. Tap to try again.</string>
+</resources>

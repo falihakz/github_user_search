@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="viewModel"
+            type="com.example.cermatitestapp.ui.main.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.MainFragment">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/search_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_user_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:listitem="@layout/item_user_list"
+            app:layout_constraintTop_toBottomOf="@id/include_toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_no_user_found"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_user_found"
+            android:textAlignment="center"
+            android:visibility="@{ viewModel.listEmpty ? View.VISIBLE : View.GONE, default=gone }"
+            tools:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/include_toolbar"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/tv_loading_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:background="@color/colorPrimary20"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/include_toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <ProgressBar
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:text="@string/loading_data"
+                android:textAlignment="center"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tv_load_more_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="10dp"
+            android:background="@color/colorPrimary20"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <ProgressBar
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:text="@string/loading_more_data"
+                android:textAlignment="center"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/error_warning_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="10dp"
+            android:background="@color/colorAccent20"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="@{ viewModel.userSearchFetchError ? View.VISIBLE : View.GONE, default=gone }"
+            tools:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/include_toolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:text="@string/failed_to_load_data"
+                android:textAlignment="center"
+                android:clickable="false"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
